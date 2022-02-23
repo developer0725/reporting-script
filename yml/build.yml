@@ -1,0 +1,48 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - 'master'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  GitVersion.SemVer: ''
+  GitVersion.AssemblySemVer: ''
+  GitVersion.MajorMinorPatch: ''
+  GitVersion.InformationalVersion: ''
+  version: '$(GitVersion.SemVer)'
+
+steps:
+- template: git-version.yml
+
+- task: FileTransform@1
+  displayName: 'Update package version'
+  inputs:
+    folderPath: '$(Build.SourcesDirectory)'
+    fileType: json
+    targetFiles: package.json
+
+- task: Npm@1
+  displayName: 'Build latest changes'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy files to $(Build.ArtifactStagingDirectory)'
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)'
+    contents: |
+      **
+      !node_modules/**
+      !dist/**
+      !yml/**
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish staged files'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: sourceCode

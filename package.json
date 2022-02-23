@@ -1,0 +1,54 @@
+{
+  "name": "time-tracking",
+  "version": "1.0.0",
+  "description": "CLI for synchronizing Screenshot Monitor with Jira Cloud, and generating time tracking reports.",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "format": "prettier --write index.js configs lib types",
+    "postinstall": "node check-engine.js",
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "repository": {},
+  "license": "UNLICENSED",
+  "engines": {
+    "npm": ">= 6.14",
+    "node": ">= 14.0"
+  },
+  "dependencies": {
+    "@fast-csv/format": "^4.3.5",
+    "@hapi/address": "^4.1.0",
+    "@sendgrid/helpers": "^7.4.2",
+    "@sendgrid/mail": "^7.4.2",
+    "@slack/webhook": "^5.0.4",
+    "axios": "^0.21.1",
+    "chevrotain": "^7.1.2",
+    "comlink": "^4.3.0",
+    "d3-array": "^2.12.1",
+    "de-homoglyph": "file:vendor/de-homoglyph",
+    "exceljs": "^4.2.1",
+    "form-data": "^3.0.1",
+    "fs-extra": "^9.1.0",
+    "lodash": "^4.17.21",
+    "luxon": "^1.26.0",
+    "moment": "2.29.1",
+    "querystring": "0.2.0",
+    "semver": "^7.3.5",
+    "source-map-support": "^0.5.19",
+    "stringify-entities": "^3.1.0",
+    "strip-ansi": "^6.0.0",
+    "tasktree-cli": "^3.0.1",
+    "xlsx": "^0.16.9",
+    "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168",
+    "@types/luxon": "^1.26.3",
+    "@types/node": "^14.14.37",
+    "@types/yargs": "^15.0.13",
+    "prettier": "^2.2.1",
+    "typescript": "^3.9.9"
+  }
+}
